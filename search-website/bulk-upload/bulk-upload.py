@@ -17,8 +17,8 @@ from azure.search.documents.indexes.models import (
 )
 
 # Get the service name (short name) and admin API key from the environment
-service_name = 'YOUR-SEARCH-SERVICE-NAME'
-key = 'YOUR-SEARCH-SERVICE-ADMIN-API-KEY'
+service_name = 'searchr'
+key = 'ZytjzJZhl8DcslhshWGfdq2vQCrz5SLspZEx540XDeAzSeA7mhwQ'
 endpoint = "https://{}.search.windows.net/".format(service_name)
 
 # Give your index a name
@@ -29,7 +29,7 @@ index_name = 'good-books'
 index_schema = './good-books-index.json'
 
 # Books catalog
-books_url = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/master/books.csv"
+books_url = "/Users/vamshi/Documents/Results2.csv"
 batch_size = 1000
 
 # Instantiate a client
@@ -112,7 +112,7 @@ def batch_upload_json_data_to_index(json_file, client):
             "isbn": str(i['isbn']),
             "isbn13": str(i['isbn13']),
             "authors": i['authors'].split(',') if i['authors'] else None,
-            "original_publication_year": int(i['original_publication_year']) if i['original_publication_year'] else 0,
+            "original_publication_year": str(i['original_publication_year']),
             "original_title": i['original_title'],
             "title": i['title'],
             "language_code": i['language_code'],
@@ -128,7 +128,6 @@ def batch_upload_json_data_to_index(json_file, client):
             "image_url": i['image_url'],
             "small_image_url": i['small_image_url']
         })
-
         # In this sample, we limit batches to 1000 records.
         # When the counter hits a number divisible by 1000, the batch is sent.
         if count % batch_size == 0:

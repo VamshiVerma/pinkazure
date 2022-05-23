@@ -35,21 +35,22 @@ export default function Details() {
       resultStyle = "nav-link",
       rawStyle    = "nav-link";
 
-  if (!isLoading && document) {
-    // View result
-    if (selectedTab === 0) {
-      resultStyle += " active";
-      detailsBody = (
-        <div className="card-body">
-          <h5 className="card-title">{document.original_title}</h5>
-          <img className="image" src={document.image_url} alt="Book cover"></img>
-          <p className="card-text">{document.authors?.join('; ')} - {document.original_publication_year}</p>
-          <p className="card-text">ISBN {document.isbn}</p>
-          <Rating name="half-rating-read" value={parseInt(document.average_rating)} precision={0.1} readOnly></Rating>
-          <p className="card-text">{document.ratings_count} Ratings</p>
-        </div>
-      );
-    }
+      if (!isLoading && document) {
+        // View result
+        if (selectedTab === 0) {
+          resultStyle += " active";
+          detailsBody = (
+            <div className="card-body">
+              <h5 className="card-title">{document.original_title}</h5>
+              <img className="image" src={document.image_url} alt="Book cover" width="80" height="80"></img>
+              <p className="card-text"> {document.title}</p>
+              <p className="card-text"> {document.isbn}</p>
+              <p className="card-text"> Region: {document.authors?.join('; ')}  </p>
+              <p className="card-text"> Status: {document.original_publication_year}</p>
+              <p className="card-text">Functional Area: {document.language_code} </p>
+            </div>
+          );
+        }
 
     // View raw data
     else {
